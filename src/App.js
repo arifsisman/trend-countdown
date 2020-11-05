@@ -40,25 +40,32 @@ const renderTime = (remainingTime, name) => {
   }
 
   return (
-    <div>
-      <h1 className="text-center display-3">
-        <b>{name}</b>
-      </h1>
-      <h1 className="timer display-4">{time}</h1>
+    <div className="text-center ">
+      <h1 className="display-4 font-weight-bold">{name}</h1>
+      <h1 className="timer font-weight-bold">{time}</h1>
     </div>
   );
 };
 
 function App() {
+  const d1 = 24 * 60 * 60;
+  const h4 = 4 * 60 * 60;
+  const h1 = 60 * 60;
+  const m15 = 15 * 60;
+  const m5 = 5 * 60;
+  const m1 = 60;
+
+  const dt = new Date();
+  const now = dt.getSeconds() + 60 * dt.getMinutes() + 60 * 60 * dt.getHours();
+
   return (
     <div className="mx-4 h-100 d-flex align-content-around flex-wrap">
-      {renderTimer("D1", 24 * 60 * 60)}
-      {renderTimer("H4", 4 * 60 * 60)}
-      {renderTimer("H1", 60 * 60)}
-
-      {renderTimer("M15", 60 * 15)}
-      {renderTimer("M5", 60 * 5)}
-      {renderTimer("M1", 60)}
+      {renderTimer("D1", d1 - now)}
+      {renderTimer("H4", h4 - (now % h4))}
+      {renderTimer("H1", h1 - (now % h1))}
+      {renderTimer("M15", m15 - (now % m15))}
+      {renderTimer("M5", m5 - (now % m5))}
+      {renderTimer("M1", m1 - (now % m1))}
     </div>
   );
 }
