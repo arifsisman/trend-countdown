@@ -3,12 +3,24 @@ import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const renderTimer = (name, duration, remaining) => (
+const times = {
+  D1: 24 * 60 * 60,
+  H4: 4 * 60 * 60,
+  H1: 60 * 60,
+  M15: 15 * 60,
+  M5: 5 * 60,
+  M1: 60,
+};
+
+const dt = new Date();
+const now = dt.getSeconds() + 60 * dt.getMinutes() + 60 * 60 * dt.getHours();
+
+const renderTimer = (name, duration) => (
   <Col className="d-flex justify-content-center" sm={12} md={6} lg={4}>
     <CountdownCircleTimer
       isPlaying
       duration={duration}
-      initialRemainingTime={remaining}
+      initialRemainingTime={duration - (now % duration)}
       onComplete={() => {
         return [true, 0];
       }}
@@ -57,27 +69,10 @@ Number.prototype.toHHMMSS = function () {
   return hours + ":" + minutes + ":" + seconds;
 };
 
-function App() {
-  const m1 = 60;
-  const m5 = 5 * m1;
-  const m15 = 15 * m1;
-  const h1 = 60 * m1;
-  const h4 = 4 * h1;
-  const d1 = 24 * h1;
-
-  const dt = new Date();
-  const now = dt.getSeconds() + 60 * dt.getMinutes() + 60 * 60 * dt.getHours();
-
-  return (
-    <div className="mx-4 h-100 d-flex align-content-around flex-wrap">
-      {renderTimer("D1", d1, d1 - now)}
-      {renderTimer("H4", h4, h4 - (now % h4))}
-      {renderTimer("H1", h1, h1 - (now % h1))}
-      {renderTimer("M15", m15, m15 - (now % m15))}
-      {renderTimer("M5", m5, m5 - (now % m5))}
-      {renderTimer("M1", m1, m1 - (now % m1))}
-    </div>
-  );
-}
+const App = () => (
+  <div className="mx-4 h-100 d-flex align-content-around flex-wrap">
+    {Object.keys(times).map((key) => renderTimer(key, times[key]))}
+  </div>
+);
 
 export default App;
