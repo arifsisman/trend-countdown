@@ -1,9 +1,23 @@
 {
   "name": "trend-countdown",
+  "description": "Forex Trend Countdown",
+  "author": "Mustafa Arif Sisman",
+  "build": {
+    "appId": "com.arifsisman",
+    "productName": "Forex Trend Countdown",
+    "files": [
+      "dist/**/*",
+      "package.json"
+    ]
+  },
+  "main": "public/electron.js",
+  "homepage": "./",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "bootstrap": "^4.5.3",
+    "cross-env": "^7.0.2",
+    "electron-is-dev": "^1.2.0",
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.0",
     "react-countdown-circle-timer": "^2.3.7",
@@ -11,9 +25,14 @@
     "react-scripts": "4.0.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "eject": "react-scripts eject"
+    "react-start": "react-scripts start",
+    "react-build": "react-scripts build",
+    "react-test": "react-scripts test --env=jsdom",
+    "react-eject": "react-scripts eject",
+    "electron-build": "electron-builder -m",
+    "release": "yarn react-build && electron-builder --publish=always",
+    "build": "yarn react-build && yarn electron-build",
+    "start": "concurrently \"cross-env BROWSER=none yarn react-start\" \"wait-on http://localhost:3000 && electron .\""
   },
   "eslintConfig": {
     "extends": [
@@ -36,6 +55,10 @@
     "@babel/core": "^7.12.3",
     "@babel/preset-env": "^7.12.1",
     "@babel/preset-react": "^7.12.5",
-    "babel-loader": "^8.1.0"
+    "babel-loader": "^8.1.0",
+    "concurrently": "^5.3.0",
+    "electron": "^10.1.5",
+    "electron-builder": "^22.9.1",
+    "wait-on": "^5.2.0"
   }
 }
