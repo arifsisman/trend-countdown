@@ -4,11 +4,7 @@
   "author": "Mustafa Arif Sisman",
   "build": {
     "appId": "com.arifsisman",
-    "productName": "Forex Trend Countdown",
-    "files": [
-      "dist/**/*",
-      "package.json"
-    ]
+    "productName": "Forex Trend Countdown"
   },
   "main": "public/electron.js",
   "homepage": "./",
@@ -52,10 +48,6 @@
     ]
   },
   "devDependencies": {
-    "@babel/core": "^7.12.3",
-    "@babel/preset-env": "^7.12.1",
-    "@babel/preset-react": "^7.12.5",
-    "babel-loader": "^8.1.0",
     "concurrently": "^5.3.0",
     "electron": "^10.1.5",
     "electron-builder": "^22.9.1",

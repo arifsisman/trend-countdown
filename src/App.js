@@ -25,7 +25,7 @@ const renderTimer = (name, duration) => (
         return [true, 0];
       }}
       strokeLinecap={"square"}
-      trailColor={"#656969"}
+      trailColor={"#474747"}
       size={300}
       strokeWidth={20}
       colors={[
@@ -70,7 +70,7 @@ Number.prototype.toHHMMSS = function () {
 };
 
 const App = () => (
-  <div className="mx-4 h-100 d-flex align-content-around flex-wrap">
+  <div className="mx-4 h-100 d-flex align-content-around flex-wrap draggable">
     {Object.keys(times).map((key) => renderTimer(key, times[key]))}
   </div>
 );

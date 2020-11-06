@@ -1,16 +1,16 @@
-const electron = require("electron");
-const app = electron.app;
-const BrowserWindow = electron.BrowserWindow;
+const { app, BrowserWindow, Menu } = require("electron");
 const path = require("path");
 const isDev = require("electron-is-dev");
 
+Menu.setApplicationMenu(null);
 let mainWindow;
 
 function createWindow() {
   mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
-    icon: __dirname + "/icon.icns",
+    frame: false,
+    titleBarStyle: "hidden",
   });
   mainWindow.maximize();
   mainWindow.loadURL(
